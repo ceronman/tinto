@@ -3,7 +3,8 @@ window.onload = () ->
 
   label = new tinto.text.Label
     text: 'Hello World!'
-    x: canvas.width /2, y: canvas.height/2
+    x: canvas.width /2
+    y: canvas.height/2
     alignment: 'center'
     color: '#FFAAAA'
     font: 'Bold 40pt Arial'

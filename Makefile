@@ -1,8 +1,8 @@
 OUTPUT = tinto.js
 
-SOURCES = tinto/canvas.coffee tinto/text.coffee tinto/resource.coffee
+SOURCES = tinto/canvas.coffee tinto/resource.coffee tinto/text.coffee tinto/sprite.coffee
 
-EXAMPLES = examples/test.coffee examples/helloworld.coffee
+EXAMPLES = examples
 
 build:
 	coffee --join $(OUTPUT) --compile $(SOURCES)

@@ -29,7 +29,8 @@ class GameCanvas
         callback(dt)
       draw()
 
-    window.setInterval(update, 1000/60.0)
+    tinto.resource.loaded () ->
+      window.setInterval(update, 1000/60.0)
 
   draw: (callback) ->
     this.drawCallbacks.push(callback)
