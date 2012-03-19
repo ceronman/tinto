@@ -8,6 +8,7 @@ class Label
     tinto.activeCanvas.preserveContext (context) =>
       context.font = this.font ? '14pt Serif italic'
       context.fillStyle = this.color ? 'white'
+      context.textAlign = this.alignment ? 'start'
       context.fillText(this.text, this.x, this.y)
 
 

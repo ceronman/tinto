@@ -2,7 +2,7 @@ OUTPUT = tinto.js
 
 SOURCES = tinto/canvas.coffee tinto/text.coffee
 
-EXAMPLES = examples/test.coffee
+EXAMPLES = examples/test.coffee examples/helloworld.coffee
 
 build:
 	coffee --join $(OUTPUT) --compile $(SOURCES)
@@ -11,7 +11,6 @@ watch:
 	coffee --watch --join $(OUTPUT) --compile $(SOURCES)
 	
 examples: build
-	cp $(OUTPUT) examples
 	coffee --compile $(EXAMPLES)
 	
 watch-examples:
