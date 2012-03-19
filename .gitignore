@@ -1,6 +1,2 @@
-*.class
-*.orig
-*.pyc
-*.pyo
-*.rej
-.hg
+*.js
+.project
