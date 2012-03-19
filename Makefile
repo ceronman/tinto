@@ -17,4 +17,7 @@ examples: build
 watch-examples:
 	coffee --watch --compile $(EXAMPLES)
 	
+clean:
+	find . -name *.js -delete
+	
 all: build
