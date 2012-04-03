@@ -33,6 +33,7 @@ class GameCanvas
       window.setInterval(update, 1000/60.0)
 
     tinto.resource.check()
+    tinto.input.installKeyboardCallbacks()
 
   draw: (callback) ->
     this.drawCallbacks.push(callback)

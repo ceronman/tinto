@@ -1,6 +1,6 @@
 OUTPUT = tinto.js
 
-SOURCES = tinto/canvas.coffee tinto/resource.coffee tinto/text.coffee tinto/sprite.coffee
+SOURCES = tinto/canvas.coffee tinto/resource.coffee tinto/text.coffee tinto/sprite.coffee tinto/input.coffee
 
 EXAMPLES = examples
 
