@@ -9,16 +9,16 @@ window.onload = () ->
   tinto.resource.loadAll()
 
   canvas.update (dt) ->
-    if tinto.input.keyDown("right")
+    if tinto.input.key("right")
       sprite.x += 100 * dt
 
-    if tinto.input.keyDown("left")
+    if tinto.input.key("left")
       sprite.x -= 100 * dt
 
-    if tinto.input.keyDown("up")
+    if tinto.input.key("up")
       sprite.y -= 100 * dt
 
-    if tinto.input.keyDown("down")
+    if tinto.input.key("down")
       sprite.y += 100 * dt
 
   canvas.draw ->

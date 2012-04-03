@@ -1,7 +1,8 @@
-- Keyboard input
 - Mouse input
 - Sound FX
 - Music
 - Collision detection
 - FPS
 - Box2d examples
+- Custom events
+- Keyboard events

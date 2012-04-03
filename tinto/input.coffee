@@ -140,7 +140,7 @@ tinto.input =
       code = normalizeKeyCode(code)
       delete keysDown[code]
 
-  keyDown: (keyName) ->
+  key: (keyName) ->
     keyCode = KEY_CODES[keyName]
     if keyCode
       return keysDown[keyCode]
