@@ -106,8 +106,7 @@ KEY_CODES =
   "'": 222
   "\"": 222
 
-MOZILLA = navigator.userAgent.indexOf('Gecko') != -1
-MSIE = navigator.userAgent.indexOf('MSIE') != -1
+MOZILLA = navigator.userAgent.indexOf 'Gecko' != -1
 OPERA = window.opera
 
 # Mozilla Firefox and Opera use different key codes for the following keys.
@@ -132,12 +131,12 @@ tinto.input =
   installKeyboardCallbacks: ->
     document.addEventListener "keydown", (event) ->
       code = event.which or event.keyCode
-      code = normalizeKeyCode(code)
+      code = normalizeKeyCode code
       keysDown[code] = true
 
     document.addEventListener "keyup", (event) ->
       code = event.which or event.keyCode
-      code = normalizeKeyCode(code)
+      code = normalizeKeyCode code
       delete keysDown[code]
 
   key: (keyName) ->

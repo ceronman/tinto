@@ -1,58 +1,42 @@
-class GameCanvas
+class tinto.GameCanvas
 
   constructor: (canvasID, options) ->
-    this.canvas = document.getElementById(canvasID)
     options = options ? {}
-    this.canvas.width = options.width ? 640
-    this.canvas.height = options.height ? 480
-    this.canvas.style.backgroundColor = options.background ? 'black'
-    this.context2D = this.canvas.getContext('2d')
+    @canvas = document.getElementById canvasID
+    @canvas.width = options.width ? 640
+    @canvas.height = options.height ? 480
+    @canvas.style.backgroundColor = options.background ? 'black'
+    @context2D = @canvas.getContext '2d'
 
-    tinto.setActiveCanvas(this)
+    @width = @canvas.width
+    @height = @canvas.height
 
-    this.width = this.canvas.width
-    this.height = this.canvas.height
+    tinto.activeCanvas = this
 
-    this.drawCallbacks = []
-    this.updateCallbacks = []
-
-    draw = () =>
-      for callback in this.drawCallbacks
-        callback()
+    @drawEvent = new tinto.EventEmitter()
+    @updateEvent = new tinto.EventEmitter()
 
     oldTimestamp = new Date().getTime()
-    update = () =>
+    update = =>
       newTimestamp = new Date().getTime()
       dt = (newTimestamp - oldTimestamp) / 1000
       oldTimestamp = newTimestamp
-      for callback in this.updateCallbacks
-        callback(dt)
-      draw()
+      @updateEvent.call dt
+      @drawEvent.call()
 
     tinto.resource.loaded () ->
-      window.setInterval(update, 1000/60.0)
+      window.setInterval update, 1000/60.0
 
     tinto.resource.check()
     tinto.input.installKeyboardCallbacks()
 
-  draw: (callback) ->
-    this.drawCallbacks.push(callback)
+  draw: (callback) -> @drawEvent.addCallback callback
 
-  update: (callback) ->
-    this.updateCallbacks.push(callback)
+  update: (callback) -> @updateEvent.addCallback callback 
 
-  clear: () ->
-    this.context2D.clearRect(0, 0, this.width, this.height)
+  clear: -> @context2D.clearRect 0, 0, @width, @height
 
   preserveContext: (drawFunction) ->
-    this.context2D.save()
-    drawFunction(this.context2D)
-    this.context2D.restore()
-
-
-this.tinto =
-
-  GameCanvas: GameCanvas
-
-  setActiveCanvas: (gameCanvas) ->
-    this.activeCanvas = gameCanvas
+    @context2D.save()
+    drawFunction @context2D
+    @context2D.restore()

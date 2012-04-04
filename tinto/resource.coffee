@@ -1,7 +1,7 @@
-resource =
+tinto.resource =
 
   images: []
-  loadedCallbacks: []
+  loadedEvent: new tinto.EventEmitter()
 
   image: (path) ->
     img = new Image()
@@ -9,28 +9,23 @@ resource =
     img._path = path
     img.onload = () =>
       img._loaded = true
-      this.check()
-
-    this.images.push(img)
+      @check()
+    @images.push(img)
     return img
 
   loadAll: () ->
-    this.loadImages()
+    @loadImages()
 
   loadImages: () ->
-    for image in this.images
+    for image in @images
       image.src = image._path
 
   check: () ->
-    for img in this.images
+    for img in @images
       if not img._loaded
         return
 
-    for callback in this.loadedCallbacks
-      callback()
+    @loadedEvent.call()
 
   loaded: (callback) ->
-    this.loadedCallbacks.push(callback)
-
-
-tinto.resource = resource
+    @loadedEvent.addCallback(callback)

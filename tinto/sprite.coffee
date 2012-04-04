@@ -1,10 +1,10 @@
-class Sprite
+class tinto.Sprite
+
   constructor: (options) ->
     for key, value of options
       this[key] = value
 
   draw: () ->
     tinto.activeCanvas.preserveContext (context) =>
-      context.drawImage(this.image, this.x, this.y)
+      context.drawImage @image, @x, @y
 
-this.tinto.Sprite = Sprite
