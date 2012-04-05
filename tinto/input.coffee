@@ -140,13 +140,13 @@ tinto.input =
       code = event.which or event.keyCode
       code = normalizeKeyCode code
       keysDown[code] = true
-      keyPressedEvent.call(keyCode)
+      keyPressedEvent.call(code)
 
     document.addEventListener "keyup", (event) ->
       code = event.which or event.keyCode
       code = normalizeKeyCode code
       delete keysDown[code]
-      keyReleasedEvent.call(keyCode)
+      keyReleasedEvent.call(code)
 
   key: (keyName) ->
     keyCode = KEY_CODES[keyName]
@@ -158,4 +158,4 @@ tinto.input =
   keypressed: (callback) -> keyPressedEvent.addCallback(callback)
   keyreleased: (callback) -> keyReleasedEvent.addCallback(callback)
 
-  keyname: (keyCode) -> KEY_NAMES[keyCode] ? 'unknown'
+  keyName: (keyCode) -> KEY_NAMES[keyCode] ? 'unknown'
