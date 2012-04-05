@@ -106,6 +106,11 @@ KEY_CODES =
   "'": 222
   "\"": 222
 
+# Generate the key names map using the inverse of KEY_CODES
+KEY_NAMES = {}
+for name, code of KEY_CODES
+   KEY_NAMES[code] = name
+
 MOZILLA = navigator.userAgent.indexOf 'Gecko' != -1
 OPERA = window.opera
 
@@ -125,6 +130,8 @@ normalizeKeyCode = (keyCode) ->
 
 # Internal map of down keys
 keysDown = {}
+keyPressedEvent = new tinto.EventEmitter()
+keyReleasedEvent = new tinto.EventEmitter()
 
 tinto.input =
 
@@ -133,11 +140,13 @@ tinto.input =
       code = event.which or event.keyCode
       code = normalizeKeyCode code
       keysDown[code] = true
+      keyPressedEvent.call(keyCode)
 
     document.addEventListener "keyup", (event) ->
       code = event.which or event.keyCode
       code = normalizeKeyCode code
       delete keysDown[code]
+      keyReleasedEvent.call(keyCode)
 
   key: (keyName) ->
     keyCode = KEY_CODES[keyName]
@@ -145,3 +154,8 @@ tinto.input =
       return keysDown[keyCode]
     else
       return false
+
+  keypressed: (callback) -> keyPressedEvent.addCallback(callback)
+  keyreleased: (callback) -> keyReleasedEvent.addCallback(callback)
+
+  keyname: (keyCode) -> KEY_NAMES[keyCode] ? 'unknown'

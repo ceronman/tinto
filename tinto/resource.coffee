@@ -1,7 +1,8 @@
+loadedEvent = new tinto.EventEmitter()
+
 tinto.resource =
 
   images: []
-  loadedEvent: new tinto.EventEmitter()
 
   image: (path) ->
     img = new Image()
@@ -25,7 +26,7 @@ tinto.resource =
       if not img._loaded
         return
 
-    @loadedEvent.call()
+    loadedEvent.call()
 
   loaded: (callback) ->
-    @loadedEvent.addCallback(callback)
+    loadedEvent.addCallback(callback)
