@@ -1,7 +1,9 @@
 - Mouse input
-- Sound FX
-- Music
-- Collision detection
+- Shape creation
 - FPS
+- Collision detection
+- Sprite sugar
+- Text sugar
 - Box2d examples
 - Layered Canvas
+- Advanced sound.
