@@ -7,24 +7,42 @@
 
   # Public interface
   images: []
+  sounds: []
+
   image: (path) ->
-    img = new Image()
-    img._loaded = false
-    img._path = path
-    img.onload = () =>
-      img._loaded = true
+    image = document.createElement('img')
+    image._loaded = false
+    image._path = path
+    image.onload = =>
+      image._loaded = true
       @check()
-    @images.push(img)
-    return img
+    @images.push(image)
+    return image
 
-  loadAll: () ->
+  sound: (path) ->
+    sound = document.createElement('audio')
+    sound._loaded = false
+    sound._path = path
+    sound.onload = =>
+      console.log 'sound loaded'
+      sound._loaded = true
+      @check()
+    @sounds.push(sound)
+    return sound
+
+  loadAll: ->
     @loadImages()
+    @loadSounds()
 
-  loadImages: () ->
+  loadImages: ->
     for image in @images
       image.src = image._path
 
-  check: () ->
+  loadSounds: ->
+    for sound in @sounds
+      sound.src = sound._path
+
+  check: ->
     for img in @images
       if not img._loaded
         return
