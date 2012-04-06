@@ -1,42 +1,49 @@
-class tinto.GameCanvas
+# tinto.canvas module.
 
-  constructor: (canvasID, options) ->
-    options = options ? {}
-    @canvas = document.getElementById canvasID
-    @canvas.width = options.width ? 640
-    @canvas.height = options.height ? 480
-    @canvas.style.backgroundColor = options.background ? 'black'
-    @context2D = @canvas.getContext '2d'
+@tinto.canvas = do ->
 
-    @width = @canvas.width
-    @height = @canvas.height
+  class GameCanvas
 
-    tinto.activeCanvas = this
+    constructor: (canvasID, options) ->
+      options = options ? {}
+      @canvas = document.getElementById canvasID
+      @canvas.width = options.width ? 640
+      @canvas.height = options.height ? 480
+      @canvas.style.backgroundColor = options.background ? 'black'
+      @context2D = @canvas.getContext '2d'
 
-    @drawEvent = new tinto.EventEmitter()
-    @updateEvent = new tinto.EventEmitter()
+      @width = @canvas.width
+      @height = @canvas.height
 
-    oldTimestamp = new Date().getTime()
-    update = =>
-      newTimestamp = new Date().getTime()
-      dt = (newTimestamp - oldTimestamp) / 1000
-      oldTimestamp = newTimestamp
-      @updateEvent.call dt
-      @drawEvent.call()
+      tinto.activeCanvas = this
 
-    tinto.resource.loaded () ->
-      window.setInterval update, 1000/60.0
+      @drawEvent = new tinto.EventEmitter()
+      @updateEvent = new tinto.EventEmitter()
 
-    tinto.resource.check()
-    tinto.input.installKeyboardCallbacks()
+      oldTimestamp = new Date().getTime()
+      update = =>
+        newTimestamp = new Date().getTime()
+        dt = (newTimestamp - oldTimestamp) / 1000
+        oldTimestamp = newTimestamp
+        @updateEvent.call dt
+        @drawEvent.call()
 
-  draw: (callback) -> @drawEvent.addCallback callback
+      tinto.resource.loaded () ->
+        window.setInterval update, 1000/60.0
 
-  update: (callback) -> @updateEvent.addCallback callback 
+      tinto.resource.check()
+      tinto.input.installKeyboardCallbacks()
 
-  clear: -> @context2D.clearRect 0, 0, @width, @height
+    draw: (callback) -> @drawEvent.addCallback callback
 
-  preserveContext: (drawFunction) ->
-    @context2D.save()
-    drawFunction @context2D
-    @context2D.restore()
+    update: (callback) -> @updateEvent.addCallback callback
+
+    clear: -> @context2D.clearRect 0, 0, @width, @height
+
+    preserveContext: (drawFunction) ->
+      @context2D.save()
+      drawFunction @context2D
+      @context2D.restore()
+
+  # Public interface.
+  GameCanvas: GameCanvas

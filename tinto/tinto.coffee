@@ -1,17 +1,22 @@
-this.tinto = {}
+# tinto module.
 
-class tinto.EventEmitter
-  constructor: ->
-    @callbacks = []
+@tinto = do ->
 
-  call: ->
-    for callback in @callbacks
-      callback.apply null, arguments
+  class EventEmitter
+    constructor: ->
+      @callbacks = []
 
-  addCallback: (callback) ->
-    @callbacks.push callback
+    call: ->
+      for callback in @callbacks
+        callback.apply null, arguments
 
-  removeCallback: (callback) ->
-    index = @callbacks.indexOf(callback)
-    if index != -1
-      @callbacks.splice index, 1
+    addCallback: (callback) ->
+      @callbacks.push callback
+
+    removeCallback: (callback) ->
+      index = @callbacks.indexOf(callback)
+      if index != -1
+        @callbacks.splice index, 1
+
+  # Public interface.
+  EventEmitter: EventEmitter

@@ -1,10 +1,16 @@
-class tinto.Sprite
+# tinto.sprite module.
 
-  constructor: (options) ->
-    for key, value of options
-      this[key] = value
+@tinto.sprite = do ->
 
-  draw: () ->
-    tinto.activeCanvas.preserveContext (context) =>
-      context.drawImage @image, @x, @y
+  class Sprite
 
+    constructor: (options) ->
+      for key, value of options
+        this[key] = value
+
+    draw: () ->
+      tinto.activeCanvas.preserveContext (context) =>
+        context.drawImage @image, @x, @y
+
+  # Public interface.
+  Sprite: Sprite

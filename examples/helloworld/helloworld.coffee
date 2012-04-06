@@ -1,5 +1,5 @@
 window.onload = () ->
-  canvas = new tinto.GameCanvas('gamecanvas')
+  canvas = new tinto.canvas.GameCanvas('gamecanvas')
 
   label = new tinto.text.Label
     text: 'Hello World!'

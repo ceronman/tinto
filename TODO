@@ -4,5 +4,4 @@
 - Collision detection
 - FPS
 - Box2d examples
-- Custom events
-- Keyboard events
+- Layered Canvas

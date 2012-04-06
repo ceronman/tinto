@@ -1,14 +1,19 @@
-tinto.text = {}
+# tinto.text module.
 
-class tinto.text.Label
+@tinto.text = do ->
 
-  constructor: (options) ->
-    for key, value of options
-      this[key] = value
+  class Label
 
-  draw: () ->
-    tinto.activeCanvas.preserveContext (context) =>
-      context.font = @font ? '14pt Serif italic'
-      context.fillStyle = @color ? 'white'
-      context.textAlign = @alignment ? 'start'
-      context.fillText @text, @x, @y
+    constructor: (options) ->
+      for key, value of options
+        this[key] = value
+
+    draw: () ->
+      tinto.activeCanvas.preserveContext (context) =>
+        context.font = @font ? '14pt Serif italic'
+        context.fillStyle = @color ? 'white'
+        context.textAlign = @alignment ? 'start'
+        context.fillText @text, @x, @y
+
+  # Public interface.
+  Label: Label

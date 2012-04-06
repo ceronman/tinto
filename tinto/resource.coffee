@@ -1,9 +1,12 @@
-loadedEvent = new tinto.EventEmitter()
+# tinto.resource module.
 
-tinto.resource =
+@tinto.resource = do ->
 
+  # Private
+  loadedEvent = new tinto.EventEmitter()
+
+  # Public interface
   images: []
-
   image: (path) ->
     img = new Image()
     img._loaded = false

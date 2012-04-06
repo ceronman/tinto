@@ -1,5 +1,5 @@
 window.onload = ->
-  canvas = new tinto.GameCanvas('gamecanvas')
+  canvas = new tinto.canvas.GameCanvas('gamecanvas')
 
   tinto.resource.loadAll()
 
