@@ -20,6 +20,9 @@
       @drawEvent = new tinto.EventEmitter()
       @updateEvent = new tinto.EventEmitter()
 
+      tinto.input.installKeyboardCallbacks()
+
+    draw: (callback) ->
       oldTimestamp = new Date().getTime()
       update = =>
         newTimestamp = new Date().getTime()
@@ -28,13 +31,12 @@
         @updateEvent.call dt
         @drawEvent.call()
 
-      tinto.resource.loaded () ->
+      tinto.resource.loaded ->
+        console.log 'loaded'
         window.setInterval update, 1000/60.0
 
       tinto.resource.check()
-      tinto.input.installKeyboardCallbacks()
-
-    draw: (callback) -> @drawEvent.addCallback callback
+      @drawEvent.addCallback callback
 
     update: (callback) -> @updateEvent.addCallback callback
 

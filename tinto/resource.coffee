@@ -13,9 +13,11 @@
     image = document.createElement('img')
     image._loaded = false
     image._path = path
-    image.onload = =>
+
+    image.addEventListener "load", =>
       image._loaded = true
       @check()
+
     @images.push(image)
     return image
 
@@ -23,10 +25,11 @@
     sound = document.createElement('audio')
     sound._loaded = false
     sound._path = path
-    sound.onload = =>
-      console.log 'sound loaded'
+
+    sound.addEventListener "canplaythrough", =>
       sound._loaded = true
       @check()
+
     @sounds.push(sound)
     return sound
 
@@ -43,8 +46,12 @@
       sound.src = sound._path
 
   check: ->
-    for img in @images
-      if not img._loaded
+    for image in @images
+      if not image._loaded
+        return
+
+    for sound in @sounds
+      if not sound._loaded
         return
 
     loadedEvent.call()

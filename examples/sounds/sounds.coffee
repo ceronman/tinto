@@ -1,8 +1,10 @@
 window.onload = ->
-  canvas = new tinto.canvas.GameCanvas('gamecanvas')
+  canvas = new tinto.canvas.GameCanvas "gamecanvas"
 
-  bounce = tinto.resource.sound('../resources/bounce.ogg')
-  goal = tinto.resource.sound('../resources/goal.ogg')
+  bounce = tinto.resource.sound("../resources/bounce.ogg")
+  goal = tinto.resource.sound("../resources/goal.ogg")
+
+  tinto.resource.loadAll()
 
   rect =
     x: canvas.width / 2
@@ -40,8 +42,6 @@ window.onload = ->
         @y = 0
         @speed_y *= -1
         goal.play()
-
-  tinto.resource.loadAll()
 
   canvas.update (dt) ->
     canvas.clear()
