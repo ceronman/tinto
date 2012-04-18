@@ -30,10 +30,6 @@
       get: -> @y + @image.height
       set: (value) -> @y = value - @image.height
 
-    Object.defineProperty @prototype, "bottom",
-      get: -> @y + @image.height
-      set: (value) -> @y = value - @image.height
-
     Object.defineProperty @prototype, "right",
       get: -> @x + @image.width
       set: (value) -> @x = value - @image.width
