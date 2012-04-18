@@ -8,9 +8,13 @@
   # Public interface
   images: []
   sounds: []
+  loaded: false
 
   image: (path) ->
-    image = document.createElement('img')
+    if @loaded
+      console.log 'WARNING: resources already loaded'
+
+    image = document.createElement 'img'
     image._loaded = false
     image._path = path
 
@@ -18,11 +22,14 @@
       image._loaded = true
       @check()
 
-    @images.push(image)
+    @images.push image
     return image
 
   sound: (path) ->
-    sound = document.createElement('audio')
+    if @loaded
+      console.log 'WARNING: resources already loaded'
+
+    sound = document.createElement 'audio'
     sound._loaded = false
     sound._path = path
 
@@ -30,7 +37,7 @@
       sound._loaded = true
       @check()
 
-    @sounds.push(sound)
+    @sounds.push sound
     return sound
 
   loadAll: ->
@@ -55,6 +62,7 @@
         return
 
     loadedEvent.call()
+    @loaded = true
 
   loaded: (callback) ->
-    loadedEvent.addCallback(callback)
+    loadedEvent.addCallback callback

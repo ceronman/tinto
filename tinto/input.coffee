@@ -159,5 +159,4 @@
 
   keypressed: (callback) -> keyPressedEvent.addCallback(callback)
   keyreleased: (callback) -> keyReleasedEvent.addCallback(callback)
-
   keyName: (keyCode) -> KEY_NAMES[keyCode] ? 'unknown'

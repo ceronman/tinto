@@ -1,6 +1,6 @@
 # tinto module.
 
-@tinto = do ->
+window.tinto = do ->
 
   class EventEmitter
     constructor: ->
