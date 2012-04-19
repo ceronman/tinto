@@ -13,10 +13,18 @@
         context.drawImage @image, @x, @y
 
     Object.defineProperty @prototype, "width",
-      get: -> @image.width ? 0
+      get: ->
+        if image? and image.width != 0
+          @image.width
+        else
+          console.warn "Image apparently not loaded."
 
     Object.defineProperty @prototype, "height",
-      get: -> @image.height ? 0
+      get: ->
+        if image? and image.width != 0
+          @image.height
+        else
+          console.warn "Image apparently not loaded."
 
     Object.defineProperty @prototype, "top",
       get: -> @y
@@ -27,20 +35,22 @@
       set: (value) -> @x = value
 
     Object.defineProperty @prototype, "bottom",
-      get: -> @y + @image.height
-      set: (value) -> @y = value - @image.height
+      get: -> @y + @height
+      set: (value) -> @y = value - @height
 
     Object.defineProperty @prototype, "right",
-      get: -> @x + @image.width
-      set: (value) -> @x = value - @image.width
+      get: -> @x + @width
+      set: (value) -> @x = value - @width
 
     Object.defineProperty @prototype, "centerY",
-      get: -> @y + @image.height / 2
-      set: (value) -> @y = value - @image.height / 2
+      get: -> @y + @height / 2
+      set: (value) -> @y = value - @height / 2
 
     Object.defineProperty @prototype, "centerX",
-      get: -> @x + @image.width / 2
-      set: (value) -> @x = value - @image.width / 2
+      get: -> @x + @width / 2
+      set: (value) ->
+        @x = value - @width / 2
+        console.log "setting centerX"
 
 
   # Public interface.

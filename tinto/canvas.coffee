@@ -1,6 +1,6 @@
 # tinto.canvas module.
 
-@tinto.canvas = do ->
+tinto.canvas = do ->
 
   class GameCanvas
 
@@ -32,7 +32,6 @@
         @drawEvent.call()
 
       tinto.resource.loaded ->
-        console.log 'loaded'
         window.setInterval update, 1000/60.0
 
       tinto.resource.check()

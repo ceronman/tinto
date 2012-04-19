@@ -8,11 +8,11 @@
   # Public interface
   images: []
   sounds: []
-  loaded: false
+  _loaded: false
 
   image: (path) ->
-    if @loaded
-      console.log 'WARNING: resources already loaded'
+    if @_loaded
+      console.warn 'Resources already loaded'
 
     image = document.createElement 'img'
     image._loaded = false
@@ -26,8 +26,8 @@
     return image
 
   sound: (path) ->
-    if @loaded
-      console.log 'WARNING: resources already loaded'
+    if @_loaded
+      console.warn 'Resources already loaded'
 
     sound = document.createElement 'audio'
     sound._loaded = false
@@ -62,7 +62,7 @@
         return
 
     loadedEvent.call()
-    @loaded = true
+    @_loaded = true
 
   loaded: (callback) ->
     loadedEvent.addCallback callback
