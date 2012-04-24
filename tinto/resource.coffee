@@ -12,7 +12,7 @@
 
   image: (path) ->
     if @_loaded
-      console.warn 'Resources already loaded'
+      console.warn 'Resources already loaded.'
 
     image = document.createElement 'img'
     image._loaded = false
@@ -27,7 +27,7 @@
 
   sound: (path) ->
     if @_loaded
-      console.warn 'Resources already loaded'
+      console.warn 'Resources already loaded.'
 
     sound = document.createElement 'audio'
     sound._loaded = false
